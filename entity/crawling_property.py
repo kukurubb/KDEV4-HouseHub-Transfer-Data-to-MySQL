@@ -6,9 +6,9 @@ from enums.transaction_type import TransactionTypeEnum
 
 
 class CrawlingProperty(Base):
-    __tablename__ = "crawling_property"
+    __tablename__ = "crawling_properties"
 
-    crawling_property_id = Column(String(100), primary_key=True)
+    crawling_properties_id = Column(String(100), primary_key=True)
     property_type = Column(Enum(PropertyTypeEnum), nullable=False)
     transaction_type = Column(Enum(TransactionTypeEnum), nullable=False)
     province = Column(String(50), nullable=True)

@@ -60,5 +60,5 @@ if __name__ == "__main__":
     )
     crawling_property_df, tag_df, map_df = zigbang.parse_data()
     insert_crawling_properties(crawling_property_df)
-    insert_tags(tag_df)
-    insert_mapping(map_df)
+    # insert_tags(tag_df)
+    # insert_mapping(map_df)

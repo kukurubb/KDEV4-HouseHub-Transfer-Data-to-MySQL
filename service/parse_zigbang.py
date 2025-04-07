@@ -111,7 +111,7 @@ class ParsingZigbang:
                     mapping_rows.append({
                         # "id": len(mapping_rows) + 1,
                         "property_id": property_id,
-                        "tag_id": tag_id
+                        "tag_id": int(tag_id)
                     })
 
         tag_df = pd.DataFrame(tag_rows)
@@ -170,10 +170,10 @@ class ParsingZigbang:
 
         # 1차 태그 데이터프레임 생성
         tag_after_exploded_df["crawling_property_id"] = tag_before_exploded_df["crawling_property_id"].apply(lambda x: f"zigbang_{x}")        
-        tag_after_exploded_df["parking_available"] = tag_before_exploded_df["parking_available"].apply(lambda x: 1 if x == "주차 가능" else 0)
-        tag_after_exploded_df["pet_allowed"] = tag_before_exploded_df["pet_allowed"].apply(lambda x: 1 if x == "Y" else 0)
-        tag_after_exploded_df["is_elevator"] = tag_before_exploded_df["is_elevator"].apply(lambda x: 1 if x == "True" else 0)
-        tag_after_exploded_df["jeonse_loan"] = tag_before_exploded_df["jeonse_loan"].apply(lambda x: 1 if x == "Y" else 0)
+        tag_after_exploded_df["parking_available"] = tag_before_exploded_df["parking_available"].apply(lambda x: "주차 가능" if x == "주차 가능" else "주차 불가능")
+        tag_after_exploded_df["pet_allowed"] = tag_before_exploded_df["pet_allowed"].apply(lambda x: "반려동물 가능" if x == "Y" else "반려동물 불가능")
+        tag_after_exploded_df["is_elevator"] = tag_before_exploded_df["is_elevator"].apply(lambda x: "엘레베이터 유" if x == "True" else "엘레베이터 무")
+        tag_after_exploded_df["jeonse_loan"] = tag_before_exploded_df["jeonse_loan"].apply(lambda x: "전세대출 가능" if x == "Y" else "전세대출 불가능")
         tag_after_exploded_df["nearby_pois"] = tag_before_exploded_df["nearby_pois"].apply(lambda x: self.explode_column(x, "poiType"))
         tag_after_exploded_df["delivery_service"] = tag_before_exploded_df["delivery_service"].apply(lambda x: self.explode_column(x, "companyName"))
         tag_after_exploded_df["amenity"] = tag_before_exploded_df["amenity"].apply(lambda x: self.explode_column(x, "description"))
