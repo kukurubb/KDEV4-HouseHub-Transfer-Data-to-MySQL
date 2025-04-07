@@ -100,12 +100,16 @@ class ParsingZigbang:
 
                     if key not in tag_map:
                         tag_map[key] = tag_id_counter
-                        tag_rows.append({"tag_id": tag_id_counter, "type": col, "value": v})
+                        tag_rows.append({
+                            # "tag_id": tag_id_counter,
+                            "type": col,
+                            "value": v
+                        })
                         tag_id_counter += 1
 
                     tag_id = tag_map[key]
                     mapping_rows.append({
-                        "id": len(mapping_rows) + 1,
+                        # "id": len(mapping_rows) + 1,
                         "property_id": property_id,
                         "tag_id": tag_id
                     })

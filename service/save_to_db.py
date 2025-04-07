@@ -96,7 +96,7 @@ def insert_tags(df):
 
         for _, row in df.iterrows():
             tag = Tag(
-                tag_id=row["tag_id"],
+                # tag_id=row["tag_id"],
                 type=row["type"],
                 value=row["value"]
             )
@@ -139,7 +139,7 @@ def insert_mapping(df):
 
         for _, row in df.iterrows():
             mapping = CrawlingPropertyTagMap(
-                id=row["id"],
+                # id=row["id"],
                 property_id=row["property_id"],
                 tag_id=row["tag_id"]
             )
