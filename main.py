@@ -17,6 +17,7 @@ if __name__ == "__main__":
             "city": "item.addressOrigin.local2",
             "dong": "item.addressOrigin.local3",
             "detail_address": "item.jibunAddress",
+            "area": "item.area.전용면적M2",
             "floor": "item.floor.floor",
             "all_floors": "item.floor.allFloors",
             "sale_price": "item.price.sales",
@@ -28,6 +29,8 @@ if __name__ == "__main__":
             "real_estate_agent_contact": "agent.agentPhone",
             "real_estate_office_name": "agent.agentTitle",
             "real_estate_office_address": "agent.agentAddress",
+            "bath_room_cnt": "item.bathroomCount",
+            "room_cnt": "item.roomCount",
         },
         "naver": {
             "crawling_properties_id": "articleDetail.articleNo",
@@ -37,6 +40,7 @@ if __name__ == "__main__":
             "city": "articleDetail.divisionName",
             "dong": "articleDetail.sectionName",
             "detail_address": "articleDetail.exposureAddress",
+            "area": "articleSpace.exclusiveSpace",
             "floor": "articleFloor.correspondingFloorCount",
             "all_floors": "articleFloor.totalFloorCount",
             "sale_price": "articlePrice.dealPrice",
@@ -48,6 +52,8 @@ if __name__ == "__main__":
             "real_estate_agent_contact": "articleRealtor.cellPhoneNo",
             "real_estate_office_name": "articleRealtor.realtorName",
             "real_estate_office_address": "articleRealtor.address",
+            "bath_room_cnt": "articleDetail.roomCount",
+            "room_cnt": "articleDetail.bathroomCount",
         },
     }
     property_details_dirs = {

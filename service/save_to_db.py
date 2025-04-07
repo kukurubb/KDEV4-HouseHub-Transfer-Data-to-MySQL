@@ -35,6 +35,7 @@ def insert_sample_data(df: pd.DataFrame):
                 city=row["city"],
                 dong=row["dong"],
                 detail_address=row["detail_address"],
+                area=row["area"],
                 floor=row["floor"],
                 all_floors=row["all_floors"],
                 sale_price=row["sale_price"],
@@ -46,6 +47,8 @@ def insert_sample_data(df: pd.DataFrame):
                 real_estate_agent_contact=row["real_estate_agent_contact"],
                 real_estate_office_name=row["real_estate_office_name"],
                 real_estate_office_address=row["real_estate_office_address"],
+                bath_room_cnt=row["bath_room_cnt"],
+                room_cnt=row["room_cnt"],
             )
             db.append(property_obj)
             
