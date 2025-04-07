@@ -1,4 +1,4 @@
-from service.save_to_db import insert_sample_data
+from service.save_to_db import insert_crawling_properties, insert_mapping, insert_tags
 from service.parse_naver import ParsingNaver
 from service.parse_zigbang import ParsingZigbang
 from enums.direction import DirectionEnum
@@ -8,15 +8,16 @@ from enums.transaction_type import TransactionTypeEnum
 
 if __name__ == "__main__":
     # 컬럼 매핑
-    column_mapping = {
+    main_table_column_mapping = {
         "zigbang": {
-            "crawling_properties_id": "item.itemId",
+            "crawling_property_id": "item.itemId",
             "property_type": "item.serviceType",
             "transaction_type": "item.salesType",
             "province": "item.addressOrigin.local1",
             "city": "item.addressOrigin.local2",
             "dong": "item.addressOrigin.local3",
             "detail_address": "item.jibunAddress",
+            "area": "item.area.전용면적M2",
             "floor": "item.floor.floor",
             "all_floors": "item.floor.allFloors",
             "sale_price": "item.price.sales",
@@ -28,39 +29,36 @@ if __name__ == "__main__":
             "real_estate_agent_contact": "agent.agentPhone",
             "real_estate_office_name": "agent.agentTitle",
             "real_estate_office_address": "agent.agentAddress",
-        },
-        "naver": {
-            "crawling_properties_id": "articleDetail.articleNo",
-            "property_type": "articleDetail.realestateTypeName",
-            "transaction_type": "articleDetail.tradeTypeName",
-            "province": "articleDetail.cityName",
-            "city": "articleDetail.divisionName",
-            "dong": "articleDetail.sectionName",
-            "detail_address": "articleDetail.exposureAddress",
-            "floor": "articleFloor.correspondingFloorCount",
-            "all_floors": "articleFloor.totalFloorCount",
-            "sale_price": "articlePrice.dealPrice",
-            "deposit": "articlePrice.warrantPrice",
-            "monthly_rent_fee": "articlePrice.rentPrice",
-            "direction": "articleAddition.direction",
-            "real_estate_agent_id": "articleRealtor.realtorId",
-            "real_estate_agent_name": "articleRealtor.representativeName",
-            "real_estate_agent_contact": "articleRealtor.cellPhoneNo",
-            "real_estate_office_name": "articleRealtor.realtorName",
-            "real_estate_office_address": "articleRealtor.address",
+            "bath_room_cnt": "item.bathroomCount",
+            "room_cnt": "item.roomCount",
         },
     }
+
+    tag_table_column_mapping = {
+        "zigbang": {
+            "parking_available": "item.parkingAvailableText",
+            "pet_allowed": "item.petAllowed",
+            "is_elevator": "item.elevator",
+            "jeonse_loan": "item.jeonseLoanEligible",
+            "nearby_pois": "item.neighborhoods.nearbyPois",
+            "delivery_service": "item.neighborhoods.distributions",
+            "amenity": "item.neighborhoods.amenities",
+            "subway": "subways"
+        }
+    }
+
     property_details_dirs = {
         "zigbang": "./data/zigbang_property_details/*.txt",
         "naver": "./data/naver_property_details/*.txt",
     }
-    
-    # 네이버 데이터 파싱 및 저장
-    naver = ParsingNaver(property_details_dirs["naver"], column_mapping["naver"])
-    naver_df = naver.parse_data()
-    insert_sample_data(naver_df)
 
     # 직방 데이터 파싱 및 저장
-    zigbang = ParsingZigbang(property_details_dirs["zigbang"], column_mapping["zigbang"])
-    zigbang_df = zigbang.parse_data()
-    insert_sample_data(zigbang_df)
+    zigbang = ParsingZigbang(
+        property_details_dirs["zigbang"],
+        main_table_column_mapping["zigbang"],
+        tag_table_column_mapping["zigbang"],
+    )
+    crawling_property_df, tag_df, map_df = zigbang.parse_data()
+    insert_crawling_properties(crawling_property_df)
+    insert_tags(tag_df)
+    insert_mapping(map_df)
