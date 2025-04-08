@@ -50,6 +50,14 @@ class ParsingNaver:
         # property_id 형식 변환
         df['crawling_properties_id'] = df['crawling_properties_id'].apply(lambda x: f"naver_{x}")
 
+        # room_cnt 형식 변환
+        df['room_cnt'] = df['room_cnt'].apply(lambda x: '0' if str(x).strip() == '-' else x)
+        df['room_cnt'] = df['room_cnt'].astype(int)
+
+        # bath_room_cnt 형식 변환
+        df['bath_room_cnt'] = df['bath_room_cnt'].apply(lambda x: '0' if str(x).strip() == '-' else x)
+        df['bath_room_cnt'] = df['bath_room_cnt'].astype(int)
+
         # # detail_address 주소 변환(사용x)
         # df["detail_address"] = df["detail_address"].apply(lambda x: str(x).split()[-1] if pd.notnull(x) else x)
 
