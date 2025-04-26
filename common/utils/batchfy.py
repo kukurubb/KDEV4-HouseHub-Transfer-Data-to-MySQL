@@ -25,11 +25,3 @@ def make_batches(html_source_dir: str, batch_size: int = 1000) -> List[List[str]
     
     # 파일 리스트를 배치 크기로 나누기
     return np.array_split(html_source_files, np.ceil(len(html_source_files) / batch_size))
-
-# 파일 이름 추출 함수
-def get_file_name(file_path):
-    file_name_with_ext = os.path.basename(file_path)
-    file_name = os.path.splitext(file_name_with_ext)[0]
-
-    return file_name
-

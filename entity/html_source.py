@@ -13,10 +13,8 @@ from sqlalchemy.dialects.mysql import (
     MEDIUMTEXT,  # 최대 16,777,215 bytes (16MB)
     LONGTEXT     # 최대 4,294,967,295 bytes (4GB)
 )
+from entity.base import Base
 
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
 
 class HtmlSource(Base):
     __tablename__ = "html_sources"

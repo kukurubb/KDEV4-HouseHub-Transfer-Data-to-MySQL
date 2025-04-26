@@ -1,6 +1,5 @@
 import enum
 
-
 class TransactionTypeEnum(enum.Enum):
     SALE = "매매"
     JEONSE = "전세"
